@@ -33,7 +33,7 @@ def parttwo():
 
     crates = {k: list(reversed(v)) for k, v in CRATES.items()}
 
-    def move(_from, to, amount):
+    def move_multiple(_from, to, amount):
         temp = list()
         for i in range(amount):
             temp.append(crates[_from].pop())
@@ -42,9 +42,9 @@ def parttwo():
 
     for row in data:
         row = [c for c in row.replace("move", "").replace("from", "").replace("to", "").split(" ") if c]
-        move(int(row[1]), int(row[2]), int(row[0]))
+        move_multiple(int(row[1]), int(row[2]), int(row[0]))
     print(crates)
-    print([v[-1] for v in crates.values()])
+    print("PART Two: " + "".join([v[-1] for v in crates.values()]))
 
 
 if __name__ == "__main__":

@@ -1,25 +1,4 @@
-from pprint import pprint
-
 from utils import readfile
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-class Tree:
-    def __init__(self, x, y, left=None, right=None, up=None, down=None):
-        self.x = x
-        self.y = y
-
-        self.left = left
-        self.right = right
-        self.up = up
-        self.down = down
-
-    def __eq__(self, other):
-        if isinstance(other, Tree):
-            return self.x == other.x and self.y == other.y
-        return False
-
-
 
 
 def slow_part_one(data):
@@ -115,6 +94,7 @@ def parttwo(data):
     assert scores[tree_to_key(2, 1)] == 4
     assert scores[tree_to_key(2, 3)] == 8"""
     print(sorted(scores.items(), key=lambda t: -t[1])[:5])
+
 
 if __name__ == "__main__":
 

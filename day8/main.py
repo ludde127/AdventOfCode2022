@@ -32,7 +32,6 @@ def slow_part_one(data):
     print(len(visible_trees))
 
 
-
     #print(lower_limit())
 def parttwo(data):
     scores = {}

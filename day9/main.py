@@ -179,7 +179,7 @@ def distance(x1, y1, x2, y2):
     return np.hypot(x1-x2, y1-y2)
 
 def is_touching(x1, y1, x2, y2):
-    return distance(x1, y1, x2, y2) <= np.sqrt(2) + 0.01
+    return np.hypot(x1-x2, y1-y2) <= np.sqrt(2) + 0.01
 
 
 class Rope:

@@ -32,7 +32,6 @@ def parttwo(data):
     x = 1 # Middle of a sprite, sprite is xXx where larger x is at var x pos.
     cycle = 0
     x_width = 40
-    y_width = 6
 
     image = ""
     last_y = 0

@@ -115,4 +115,4 @@ if __name__ == "__main__":
     data = readfile("input.txt")
     monkes =  MonkeMaster(parse_monkeys(readfile("input_real.txt")))
 
-    partone(monkes) # 1466 wrong, too low
+    partone(monkes) 

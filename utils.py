@@ -33,6 +33,7 @@ class Position:
 
     def __hash__(self):
         return tuple(self.coordinates).__hash__()
+
 class Line:
     def __init__(self, point1: Position, point2: Position):
         assert len(point1.coordinates) == len(point2.coordinates)
@@ -42,7 +43,7 @@ class Line:
 
     @functools.lru_cache(3500)
     def __contains__(self, item: Position):
-
+        # THIS IS SLOW
         return all((item[i] in range for (i, range) in enumerate(self.ranges)))
 
     def __repr__(self):

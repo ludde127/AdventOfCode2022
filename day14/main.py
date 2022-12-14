@@ -7,8 +7,9 @@ def parse_input(data):
     for row in data:
         rocks.append([Position(x, y) for x, y in [pos.strip().split(",") for pos in row.split("->")]])
     return rocks
-def partone(parsed):
-    done = False
+
+def rocks_and_fast_rocks(parsed):
+    faster_rocks = set()
     rocks = set()
     for rock in parsed:
         past = None
@@ -16,10 +17,17 @@ def partone(parsed):
             if past is not None:
                 rocks.add(Line(past, part))
             past = part
+    for rock in rocks:
+        faster_rocks.update(rock.to_set())
+    return rocks, faster_rocks
 
+def partone(parsed):
+    done = False
+
+    rocks, fast_rocks = rocks_and_fast_rocks(parsed)
     def pos_is_free(pos: Position):
         #print(r)
-        return pos not in occupied_by_sand and not any((pos in _rock for _rock in rocks))
+        return pos not in occupied_by_sand and (pos[0], pos[1]) not in fast_rocks
 
     occupied_by_sand = set()
     down = Position(0,1)
@@ -78,38 +86,21 @@ def display_sand(occupied_by_sand):
 
 
 def parttwo(parsed):
-    done = False
-    rocks = set()
-    for rock in parsed:
-        past = None
-        for part in rock:
-            if past is not None:
-                rocks.add(Line(past, part))
-            past = part
-
-    faster_rocks = set()
-    print(len(rocks))
-    for rock in rocks:
-        faster_rocks.update(rock.to_set())
-    print(faster_rocks)
-
+    rocks, fast_rocks = rocks_and_fast_rocks(parsed)
 
     def pos_is_free(pos: Position):
         #print(r)
         #return pos not in occupied_by_sand and not any((pos in _rock for _rock in rocks))
-        return pos not in occupied_by_sand and (pos[0], pos[1]) not in faster_rocks
+        return pos not in occupied_by_sand and (pos[0], pos[1]) not in fast_rocks
 
     occupied_by_sand = set()
     down = Position(0,1)
     ldiag = Position(-1, 1)
     rdiag = Position(1, 1)
     max_depth_rock = max([max([j[1] for j in i]) for i in parsed])
-    #floor = Line(Position(-1e9, max_depth_rock+2), Position(1e9, max_depth_rock+2))
-    #rocks.add(floor)
     print(max_depth_rock)
-    #print(rocks)
     i = 0
-    while not done:
+    while True:
 
         sand_falling = True
         temp = SANDPOSITION
@@ -132,8 +123,9 @@ def parttwo(parsed):
             else:
                 occupied_by_sand.add(temp)
                 sand_falling = False
-        print(i, temp)
+        #print(i, temp)
         i+=1
+        print(i)
 
 
 

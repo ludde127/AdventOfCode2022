@@ -23,7 +23,7 @@ class Position:
         return Position(*coords)
 
     def __repr__(self):
-        return "("+", ".join([str(i) for i in self.coordinates]) +")"
+        return "Point("+", ".join([str(i) for i in self.coordinates]) +")"
 
     def __eq__(self, other):
         return isinstance(other, Position) and other.coordinates == self.coordinates
@@ -31,8 +31,23 @@ class Position:
     def __getitem__(self, item):
         return self.coordinates[item]
 
+    def __abs__(self):
+        return Position(*[abs(e) for e in self.coordinates])
+
     def __hash__(self):
         return tuple(self.coordinates).__hash__()
+
+    def manhattan_distance(self, other):
+        return abs(self.coordinates[0]-other[0])+abs(self.coordinates[1]-other[1])
+
+    @property
+    def x(self):
+        return self.coordinates[0]
+
+    @property
+    def y(self):
+        return self.coordinates[1]
+
 
 class Line:
     def __init__(self, point1: Position, point2: Position):
@@ -60,3 +75,9 @@ class Line:
             return {(x, list(self.ranges[1])[0]) for x in self.ranges[0]}
         else:
             assert False
+
+    def contains_y(self, y):
+        return y in self.ranges[1]
+
+    def contains_x(self, x):
+        return x in self.ranges[1]

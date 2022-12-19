@@ -197,7 +197,7 @@ if __name__ == "__main__":
     example = readfile("input.txt")
     real = readfile("input_real.txt")
     p1 = 2000000 # 4640520 TO LOW 4660320 to low
-    res = parttwo_monke(example, limit=20)
+    res = parttwo_monke(real, limit=int(4 * 1e6))
     print(res)
     print(res.x*4000000+res.y)
     #partone(example, 10)
